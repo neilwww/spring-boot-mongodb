@@ -1,6 +1,7 @@
 package com.nelsonenterprises.springbootmongodb.services;
 
 import com.nelsonenterprises.springbootmongodb.domain.User;
+import com.nelsonenterprises.springbootmongodb.dto.UserDTO;
 import com.nelsonenterprises.springbootmongodb.repository.UserRepository;
 import com.nelsonenterprises.springbootmongodb.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,13 @@ public class UserService {
             throw new ObjectNotFoundException("Object not found ");
         }
         return userById;
+    }
+
+    public User insert(User obj){
+        return repo.insert(obj);
+    }
+    public User fromDTO(UserDTO objDTO){
+        return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
     }
 
 }
