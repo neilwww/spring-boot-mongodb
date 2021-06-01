@@ -1,5 +1,6 @@
 package com.nelsonenterprises.springbootmongodb.resources;
 
+import com.nelsonenterprises.springbootmongodb.domain.Post;
 import com.nelsonenterprises.springbootmongodb.domain.User;
 import com.nelsonenterprises.springbootmongodb.dto.UserDTO;
 import com.nelsonenterprises.springbootmongodb.services.UserService;
@@ -34,6 +35,11 @@ public class UserResource {
         User obj = service.findById(id);
         return ResponseEntity.ok().body(new UserDTO(obj));
     }
+    @RequestMapping(value="/{id}/posts", method= RequestMethod.GET)
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        User obj = service.findById(id);
+    return ResponseEntity.ok().body(obj.getPosts());
+    }
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> insertUser(@RequestBody UserDTO userDTO) {
         User obj = service.fromDTO(userDTO);
@@ -53,4 +59,5 @@ public class UserResource {
         obj = service.update(obj);
         return ResponseEntity.noContent().build();
     }
+
 }
