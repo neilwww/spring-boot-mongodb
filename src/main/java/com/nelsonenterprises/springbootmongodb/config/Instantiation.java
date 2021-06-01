@@ -3,6 +3,7 @@ package com.nelsonenterprises.springbootmongodb.config;
 import com.nelsonenterprises.springbootmongodb.domain.Post;
 import com.nelsonenterprises.springbootmongodb.domain.User;
 import com.nelsonenterprises.springbootmongodb.dto.AuthorDTO;
+import com.nelsonenterprises.springbootmongodb.dto.CommentDTO;
 import com.nelsonenterprises.springbootmongodb.repository.PostRepository;
 import com.nelsonenterprises.springbootmongodb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,11 @@ public class Instantiation implements CommandLineRunner {
         userRepository.saveAll(Arrays.asList(renato,felipe));
 
         Post post1 = new Post(null, sdf.parse("23/09/2020"), "na academia", "malhando perna", new AuthorDTO(felipe));
+
+        CommentDTO comm1 = new CommentDTO("verme imundo!", sdf.parse("23/09/2011"), new AuthorDTO(felipe));
+        CommentDTO comm2 = new CommentDTO("mike litoris", sdf.parse("07/06/2020"), new AuthorDTO(felipe));
+
+        post1.getComments().addAll(Arrays.asList(comm1, comm2));
 
         postRepository.saveAll(Arrays.asList(post1));
 
